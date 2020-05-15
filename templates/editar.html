@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Editar</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+  </head>
+  <body class="editar">
+    <div class="form">
+      <form class="" action="/update/{{contacto.0}}" method="post">
+        <h2>Modificar</h2>
+        <div class="cajas">
+          <input type="text" name="nombre" value="{{contacto.1}}">
+          <input type="text" name="tel" value="{{contacto.2}}">
+          <input type="text" name="email" value="{{contacto.3}}">
+        </div>
+
+        <div class="botones">
+          <input class="boton" type="submit" name="" value="Guardar">
+          <input class="boton" type="submit"  name="salir" value="Salir" onclick="volver()">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,104 +1,117 @@
+/* Configuracion para todas las ventanas*/
+*{box-sizing:border-box;}
+
 html{
-  font-size: 62.5%; /** Reset para REMS - 62.5% = 10px de 16px**/
+  font-size: 62.5%; /** Para REMS - 62.5% = 10px de 16px**/
 }
 
 body{
   background-color: #6C7279;
   margin: 0;
   font-size: 1.6rem;
+  height: 100vh;
 }
 
-header{
-  /*background: url("../img/fondo.png");*/
-  background-image:url('../img/fondo.png');
-  background-size: cover;
-  min-height: 40rem;
-  color: white;
-  margin: 0 auto 0 auto;
-}
+/* INDEX*/
 
-.Menu{
-  padding: 3rem;
+.index{
+  height: 100vh;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.Menu h1{
-  font-family: fantasy;
-  font-size: 4.2rem;
-  color: #FA4848;
-}
-
-.botones{
-  padding: 1.5rem;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.botones a{
-  width: 40rem;;
-  margin-right: 3rem;
-  text-decoration: none;
-  font-size: 2rem;
-  color: white;
-}
-
-.botones a:last-of-type{
-  margin-right: 0;
-}
-
-.botones a:hover{
-  color:  #FA4848;
-}
-
-.txt-encabezado{
-  margin: 0 7rem 0 7rem;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(5, 122, 24, 0.5);
-}
-
-header p{
-  width: 30rem;
-  text-align: justify;
-  font-size: 1.6rem;
-  font-family: arial;
-}
-/* Seccion de contenido*/
-
-.contenido{
-  display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
 
-.contenido h3{
-  color: #F8FF11;
-}
-
-.info{
+.editar{
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.art{
-  flex-basis: 40rem;
-  text-align: justify;
-  padding: 0 2rem 0 2rem;
+.form{
+  margin-left: 4rem;
 }
 
-/** Definimos el tamaño para las imagenes**/
-
-.icono{
-  width: 10rem;
-  height: 5rem;
-}
-
-footer{
-  width: 100%;
-  font-size: 1.25rem;
-  font-family: fantasy;
+.form form{
   text-align: center;
+	width: 30rem;
+	padding: 1.6rem;
+	border-radius: 1rem;
+	background-color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.cajas input{
+  margin-bottom: 1.5rem;
+  width: 18rem;
+	padding: .3rem 1rem;
+	border: .1rem solid #f6f6f6;
+	border-radius: .3rem;
+	background-color: #f6f6f6;
+	display: inline-block;
+}
+
+.buscar{
+  text-align: center;
+	width: 30rem;
+	padding: 1.6rem;
+	border-radius:1rem;
+	margin:auto;
+	background-color: #ccc;
+}
+
+.buscar input{
+  margin-bottom: 1.5rem;
+  width: 18rem;
+	padding: .3rem 1rem;
+	border: .1rem solid #f6f6f6;
+	border-radius: .3rem;
+	background-color: #f6f6f6;
+	display: inline-block;
+}
+
+
+.boton{
+  margin-left: 1rem;
+  width:calc(100% / 2 - 1rem);
+	padding: .8rem 1.6rem;
+	margin-top:1.3rem;
+	border: .1rem solid #000;
+	border-radius: .5rem;
+	color:#fff;
+	background-color:#000;
+}
+
+.tabla-contactos{
+  text-align: center;
+  border-radius:1rem;
+	margin:auto;
+	background-color: #ccc;
+  padding: 3rem;
+}
+
+.tabla-contactos table{
+  border: #292929 .5rem solid;
+}
+
+td{
+  min-width: 20rem;
+  font-size: 2rem;
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: .5rem;
+  border: #6C7279 .2rem solid;
+}
+
+thead td{
+  font-family: fantasy;
+}
+
+.boton-t{
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: .9rem;
+  background-color: #000;
 }
