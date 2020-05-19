@@ -42,14 +42,15 @@ def add_contact():
 @app.route("/edit/<id>")
 def get_contact(id):
     cur = bd.connection.cursor()
-    cur.execute('Select * from contactos Where id = %s', (id))
+    cur.execute('Select * from contactos Where id = {}'.format(id))
+    print(id)
     data = cur.fetchall()
     return render_template("editar.html", contacto=data[0])
 
 @app.route("/delete/<string:id>")
 def delete(id):
     cur = bd.connection.cursor()
-    cur.execute('Delete from contactos Where id = {0}'.format(id))
+    cur.execute('Delete from contactos Where id = {}'.format(id))
     bd.connection.commit()
 
     flash("Contacto Eliminado!")

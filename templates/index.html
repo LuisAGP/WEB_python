@@ -7,19 +7,24 @@
     <script type="text/javascript">
       function buscar(){
         if (document.getElementById("bus")) {
-          var dato_cuadro_texto = document.getElementById('bus').value;
+          var dato_cuadro_texto = document.getElementById('bus').value.toLowerCase();
           if (document.getElementsByClassName("nombres")){
             var nombres = document.getElementsByClassName("nombres");
             var fila = document.getElementsByClassName("datos");
+            var contador = 0;
 
             for (var i = 0; i < nombres.length; i++) {
-              var nombre = nombres[i].innerText;
+              var nombre = nombres[i].innerText.toLowerCase();
               if (!String(nombre).startsWith(String(dato_cuadro_texto))){
                 fila[i].style.display = 'none';
               }else{
+                contador++;
                 fila[i].style.display = '';
               }
             }
+            if(contador == 0){
+              document.getElementById("vacio").style.display = '';
+            }else {document.getElementById("vacio").style.display = 'none';}
           }
         }
       }
@@ -29,27 +34,28 @@
           evt.preventDefault();
       	}
       }
+
+      function BorrarMsg(){
+        if (document.getElementById("msg")) {
+          mensaje = document.getElementById("msg");
+          mensaje.parentNode.removeChild(mensaje);
+        }
+      }
+
+      setTimeout(BorrarMsg, 1500);
     </script>
   </head>
   <body class="index">
     <div class="form">
-      {% with msg = get_flashed_messages() %}
-      {% if msg %}
-      {% for ms in msg %}
-      <p>{{ms}}</p>
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
-
       <form action="/add_contact" method="POST">
         <div class="titulo">
           <h2>Agrega un nuevo contacto</h2>
         </div>
 
         <div class="cajas">
-          <input type="text" name="nombre" value="" placeholder="Nombre completo">
-          <input type="text" name="telefono" value="" placeholder="Telefono">
-          <input type="text" name="correo" value="" placeholder="Correo">
+          <input type="text" name="nombre" value="" placeholder="Nombre completo" required>
+          <input type="text" name="telefono" value="" placeholder="Telefono" required pattern="[0-9]{10}" title="Dato invalido, el número debe tener 10 digitos">
+          <input type="email" name="correo" value="" placeholder="Correo" required>
         </div>
 
         <div class="botones">
@@ -63,28 +69,41 @@
       </div>
     </div>
 
-
-    <div id="tabla" class="tabla-contactos">
-      <table>
-        <thead><h2>Contactos</h2>
-          <tr>
-            <td>Nombre</td>
-            <td>Telefono</td>
-            <td>Correo</td>
-          </tr>
-        </thead>
-        <tbody id="cont">
-          {% for contacto in contactos %}
-          <tr id="{{contacto.0}}" class="datos">
-            <td id='nombre' class="nombres">{{contacto.1}}</td>
-            <td>{{contacto.2}}</td>
-            <td>{{contacto.3}}</td>
-            <td><a class="boton-t" href="/edit/{{contacto.0}}">Editar</a></td>
-            <td><a class="boton-t" id="eli" onclick="conf(event)" href="/delete/{{contacto.0}}">Eliminar</a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="contactos">
+      {% with msg = get_flashed_messages() %}
+      {% if msg %}
+      {% for ms in msg %}
+      <h2 id="msg" style="padding: 1rem; background-color: #ccc; border-radius: .8rem;">{{ms}}</h2>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <div id="tabla" class="tabla-contactos">
+        <table>
+          <thead><h2>Contactos</h2>
+            <tr>
+              <td>Nombre</td>
+              <td>Telefono</td>
+              <td>Correo</td>
+            </tr>
+          </thead>
+          <tbody id="cont">
+            {% for contacto in contactos %}
+            <tr id="{{contacto.0}}" class="datos">
+              <td id='nombre' class="nombres">{{contacto.1}}</td>
+              <td>{{contacto.2}}</td>
+              <td>{{contacto.3}}</td>
+              <td><a class="boton-t" href="/edit/{{contacto.0}}">Editar</a></td>
+              <td><a class="boton-t" id="eli" onclick="conf(event)" href="/delete/{{contacto.0}}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+            <tr id="vacio" style="display: none;">
+              <td>No hay datos</td>
+              <td>No hay datos</td>
+              <td>No hay datos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

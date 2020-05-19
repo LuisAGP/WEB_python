@@ -17,7 +17,7 @@ body{
 .index{
   height: 100vh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -29,7 +29,7 @@ body{
 }
 
 .form{
-  margin-left: 4rem;
+  margin: 0 4rem 0 4rem;
 }
 
 .form form{
@@ -82,10 +82,13 @@ body{
 	background-color:#000;
 }
 
-.tabla-contactos{
+.contactos{
   text-align: center;
+  margin:auto;
+}
+
+.tabla-contactos{
   border-radius:1rem;
-	margin:auto;
 	background-color: #ccc;
   padding: 3rem;
 }
@@ -95,10 +98,10 @@ body{
 }
 
 td{
-  min-width: 20rem;
-  font-size: 2rem;
+  /*min-width: 20rem;*/
+  font-size: 1.8rem;
+  padding: .3rem;
   font-family: monospace;
-  padding: 1rem;
   border-radius: .5rem;
   border: #6C7279 .2rem solid;
 }
@@ -108,10 +111,11 @@ thead td{
 }
 
 .boton-t{
+  width: 3rem;
   color: white;
   text-decoration: none;
-  padding: 1rem;
-  font-size: 2rem;
+  padding: .5rem;
+  font-size: 1.2rem;
   border-radius: .9rem;
   background-color: #000;
 }
