@@ -3,19 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>Editar</title>
+    <!-- Llamamos a nuestra hoja de estilos css -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    </script>
   </head>
   <body class="editar">
     <div class="form">
+      <!-- Definimos el formulario donde editaremos los contactos -->
       <form class="" action="/update/{{contacto.0}}" method="post">
         <h2>Modificar</h2>
+        <!-- Creamos los campos nombre, telefono y correo como requeridos -->
         <div class="cajas">
+          <!-- Estos campos seran llenados a traves de la informacion enviada por el servidor -->
+          <!-- contactos.0 = id -->
+          <!-- contactos.1 = nombre -->
+          <!-- contactos.2 = telefono -->
+          <!-- contactos.3 = correo -->
           <input type="text" name="nombre" value="{{contacto.1}}" required>
           <input type="text" name="tel" value="{{contacto.2}}" required pattern="[0-9]{10}" title="Dato invalido, el número debe tener 10 digitos">
           <input type="email" name="email" value="{{contacto.3}}" required>
         </div>
-
+        <!-- Definimos los botones para enviar la informacion del contacto actualizado o para salir al index -->
+        <!-- Esta informacion es enviada a traves del metodo POST -->
         <div class="botones">
           <input class="boton" type="submit" name="" value="Guardar">
           <input class="boton" type="submit"  name="salir" value="Salir">

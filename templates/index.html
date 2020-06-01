@@ -3,73 +3,111 @@
   <head>
     <meta charset="utf-8">
     <title>Agenda WEB</title>
+    <!-- Llammamos nuestra hoja de estilos css -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <script type="text/javascript">
+
+      //Funcion para filtrar la tabla de contactos
+      //Esta funcion se ejecutara cada vez que presionemos una tecla en el campo buscar
       function buscar(){
+        //Verificamos que exista el input"text" buscar
         if (document.getElementById("bus")) {
+          //Extraemos el valor escrito en el campo
           var dato_cuadro_texto = document.getElementById('bus').value.toLowerCase();
+          //Verificamos si existe la celda con id = "nombres"
           if (document.getElementsByClassName("nombres")){
+            //Definimos una variable para todas las celdas con el id nombres
             var nombres = document.getElementsByClassName("nombres");
+            //definimos una variable para todas las filas de la tabla
             var fila = document.getElementsByClassName("datos");
+            //Definimos un contador
             var contador = 0;
 
+            //Por cada celda que exista con id = nombres
             for (var i = 0; i < nombres.length; i++) {
+              //Extraemos el texto de la celda
               var nombre = nombres[i].innerText.toLowerCase();
+              //Si el texto de la celda no comienza con el texto de el campo buscar
               if (!String(nombre).startsWith(String(dato_cuadro_texto))){
+                //Ocultamos las filas que no coincidan con la busqueda
                 fila[i].style.display = 'none';
               }else{
+                //Si la celda de nombre coincide con el nombre buscado o sus primeras letras
+                //incrementamos el contador
                 contador++;
+                //Desocultamos la fila o si esta desoculta la deja igual
                 fila[i].style.display = '';
               }
             }
+            //Si nuestro contador sigue siendo 0 hasta este punto significa que no hubo coincidencias en la tabla y el campo de busqueda
             if(contador == 0){
+              //Entonces desocultamos la fila "No hay informacion" para notificar al usuario
               document.getElementById("vacio").style.display = '';
+              //Pero si nuestro contador encontro coincidencias
+              //Ocultamos la fila "No hay informacion"
             }else {document.getElementById("vacio").style.display = 'none';}
           }
         }
       }
 
+      //funcion para confirmar la eliminacion
+      //Esta funcion hereda un evento (onClick)
       function conf(evt){
+        //Creamos una notificacion de tipo confirm
+        //Si el usuario da en cancelar
         if (!confirm("¿Estas seguro de eliminarlo?")) {
+          //Cancelamos el evento y no se manda la peticion al servidor
           evt.preventDefault();
       	}
+        //de otro modo si el usuario da aceptar, la peticion es mandada al servidor
       }
 
+      //Funcion para eliminar el mensaje emergente
       function BorrarMsg(){
+        //Si el mensaje existe
         if (document.getElementById("msg")) {
+          //Definimos una variable con las propiedades del mensaje
           mensaje = document.getElementById("msg");
+          //Eliminamos el mensaje
           mensaje.parentNode.removeChild(mensaje);
         }
       }
-
+      //La funcion de eliminar el mensjae sera ejecutada cada segundo y medio
       setTimeout(BorrarMsg, 1500);
     </script>
   </head>
   <body class="index">
     <div class="form">
+      <!-- Formulario para agregar un contacto -->
       <form action="/add_contact" method="POST">
         <div class="titulo">
           <h2>Agrega un nuevo contacto</h2>
         </div>
 
         <div class="cajas">
+          <!-- Campos de texto de nombre, telefono y correo requeridos -->
+          <!-- Agregamos una expresion regular para obligar al usuario a intruducir 10 digitos como telefono -->
           <input type="text" name="nombre" value="" placeholder="Nombre completo" required>
           <input type="text" name="telefono" value="" placeholder="Telefono" required pattern="[0-9]{10}" title="Dato invalido, el número debe tener 10 digitos">
           <input type="email" name="correo" value="" placeholder="Correo" required>
         </div>
-
+        <!-- Botones para enviar peticion al servidor(submit) o para limpiar los campos del formulario(reset) -->
         <div class="botones">
           <input class="boton" type="submit" name="" value="Guardar">
           <input class="boton" type="reset" name="" value="Limpiar">
         </div>
       </form>
 
+      <!-- Campo de texto para filtrar la tabla de contactos -->
+      <!-- Con un escucha de tipo onkyuo para ejecutar la funcion buscar() cada vez que tecleamos en el campo -->
       <div class="buscar">
         <input type="text" name="buscar" id="bus" onkeyup="buscar()" placeholder="Buscar nombre...">
       </div>
     </div>
 
+
     <div class="contactos">
+      <!-- Creacion del mensaje emergente, este se recibira desde el servidor cada que se haga una peticion del tipo "Eliminar" o "Modificar" -->
       {% with msg = get_flashed_messages() %}
       {% if msg %}
       {% for ms in msg %}
@@ -77,8 +115,10 @@
       {% endfor %}
       {% endif %}
       {% endwith %}
+      <!-- Creacion dinamoca de la tabla de contactos -->
       <div id="tabla" class="tabla-contactos">
         <table>
+          <!-- Encabezado de la tabla -->
           <thead><h2>Contactos</h2>
             <tr>
               <td>Nombre</td>
@@ -86,9 +126,18 @@
               <td>Correo</td>
             </tr>
           </thead>
+          <!-- Cuerpo de la tabla -->
           <tbody id="cont">
             {% for contacto in contactos %}
+            <!-- Asignamos un id a cada fila segun el id de cada consulta de la base de datos -->
+            <!-- Todas estas filas seran visibles al principio de la aplicacion -->
             <tr id="{{contacto.0}}" class="datos">
+              <!-- Definimos un id a cada celda de nombre para poder extraerlas en el metodo de buscar -->
+              <!-- Ademas llenamos cada celda de la fila con los datos enviados desde el servidor -->
+              <!-- contacto.0 = id -->
+              <!-- contacto.1 = nombre -->
+              <!-- contacto.2 = telefono -->
+              <!-- contacto.3 = correo -->
               <td id='nombre' class="nombres">{{contacto.1}}</td>
               <td>{{contacto.2}}</td>
               <td>{{contacto.3}}</td>
@@ -96,6 +145,7 @@
               <td><a class="boton-t" id="eli" onclick="conf(event)" href="/delete/{{contacto.0}}">Eliminar</a></td>
             </tr>
             {% endfor %}
+            <!-- Se define la fila oculta de la tabla con las celdas "No hay datos" -->
             <tr id="vacio" style="display: none;">
               <td>No hay datos</td>
               <td>No hay datos</td>

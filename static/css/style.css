@@ -1,10 +1,16 @@
-/* Configuracion para todas las ventanas*/
+/* Hoja de estilos css */
+
+
+/* Definimos bordes flexibles para nuestra pagina */
 *{box-sizing:border-box;}
 
+/* Definiremos un font size por defecto de 16px adaptable a diferentes pantallas */
+/* Este font size es adaptable para que lo podamos visualizar desde una pantalla con mas resolucion y se vea igual a una con una resolucion diferente */
 html{
   font-size: 62.5%; /** Para REMS - 62.5% = 10px de 16px**/
 }
 
+/* estilo global para el body */
 body{
   background-color: #6C7279;
   margin: 0;
@@ -14,6 +20,7 @@ body{
 
 /* INDEX*/
 
+/* estilo para el body de nuestro index con un display flex para compartir la pantalla con la tabla */
 .index{
   height: 100vh;
   display: flex;
@@ -21,6 +28,7 @@ body{
   align-items: center;
 }
 
+/* estilo para el body de editar.html centramos el formulario en la centro de la pantalla */
 .editar{
   height: 100vh;
   display: flex;
@@ -28,10 +36,12 @@ body{
   align-items: center;
 }
 
+/* Margenes para nuestros formularios */
 .form{
   margin: 0 4rem 0 4rem;
 }
 
+/* Definimos un estilo a nuestros formularios */
 .form form{
   text-align: center;
 	width: 30rem;
@@ -41,6 +51,7 @@ body{
   margin-bottom: 2rem;
 }
 
+/* Definimos un estilo a nuestros campos de texto */
 .cajas input{
   margin-bottom: 1.5rem;
   width: 18rem;
@@ -51,6 +62,7 @@ body{
 	display: inline-block;
 }
 
+/* definimos un estilo a nuestro campo para buscar(parecido al de los formularios) */
 .buscar{
   text-align: center;
 	width: 30rem;
@@ -60,6 +72,7 @@ body{
 	background-color: #ccc;
 }
 
+/* Estilos para el campo de buscar(parecido al de los formularios) */
 .buscar input{
   margin-bottom: 1.5rem;
   width: 18rem;
@@ -71,6 +84,7 @@ body{
 }
 
 
+/* Definimos estilos a nuestros botones */
 .boton{
   margin-left: 1rem;
   width:calc(100% / 2 - 1rem);
@@ -82,21 +96,25 @@ body{
 	background-color:#000;
 }
 
+/* Definimos estilos para las celdas de los contactos */
 .contactos{
   text-align: center;
   margin:auto;
 }
 
+/* Definimos estilos a nuestra tabla de contactos */
 .tabla-contactos{
   border-radius:1rem;
 	background-color: #ccc;
   padding: 3rem;
 }
 
+/* Damos un borde a la tabla de contactos */
 .tabla-contactos table{
   border: #292929 .5rem solid;
 }
 
+/* configuracion global para las celdas de contactos */
 td{
   /*min-width: 20rem;*/
   font-size: 1.8rem;
@@ -106,10 +124,12 @@ td{
   border: #6C7279 .2rem solid;
 }
 
+/* Configuracion global para el encabezado de la tabla */
 thead td{
   font-family: fantasy;
 }
 
+/* configuracion global para los botones de la tabla */
 .boton-t{
   width: 3rem;
   color: white;
